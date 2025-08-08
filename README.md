@@ -84,7 +84,7 @@ _Oranges in their default idle animation_
 
 # Additional Demos
 
-## 🎙️ Voice Commands & Features#
+## 🎙️ Voice Commands & Features
 - **`answer this`** / **`what's on clipboard`**  
   Reads the text from your clipboard and responds to it using the AI pet.
 - **`copy that`** / **`copy last response`**  
@@ -123,6 +123,7 @@ Made with ❤️ at TinkerHub Useless Projects
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--25-25?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects)
 ````
+
 
 
 
