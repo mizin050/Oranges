@@ -1,0 +1,8 @@
+Pillow>=10.0.0
+PyInstaller>=6.0.0
+numpy>=1.24.0
+speech_recognition>=3.8.1
+openai>=1.0.0
+pyttsx3>=2.90
+transformers>=4.30.0
+torch>=2.0.0
