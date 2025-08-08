@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import os
 import sys
 import random
+import pyperclip
 from chatbot import ask_pet
 from voice_listen import listen_background
 
@@ -20,6 +21,8 @@ class DesktopAssistant:
         self.root.wm_attributes("-topmost", True)
         self.root.geometry("300x300+100+100")
         self.root.wm_attributes('-transparentcolor', 'black')
+        self.last_response = None
+        self.pet_talking_enabled = True
 
         self.canvas = tk.Canvas(self.root, width=300, height=300, bg='black', highlightthickness=0)
         self.canvas.pack()
@@ -73,7 +76,7 @@ class DesktopAssistant:
                     animations["idle_alts"].append(frames)
 
         return animations
-
+    
     def show_text_bubble(self, message):
         bubble = tk.Toplevel(self.root)
         bubble.overrideredirect(True)
@@ -98,17 +101,84 @@ class DesktopAssistant:
         bubble.attributes("-topmost", True)
         bubble.after(5000, bubble.destroy)
 
+    def handle_voice_input(self, text):
+        text = text.lower().strip()
+        print("You said:", text)
+
+        if "answer this" in text or "what's on clipboard" in text:
+            clipboard_text = pyperclip.paste().strip()
+
+            if clipboard_text:
+                self.show_text_bubble("Reading clipboard... *meow*")
+                try:
+                    response = ask_pet(clipboard_text)
+                    self.last_response = response
+                    self.show_text_bubble(response)
+                except Exception as e:
+                    if "503" in str(e):
+                        self.show_text_bubble("*yawn* The server is taking a catnap right now. Try again in a minute.")
+                    else:
+                        self.show_text_bubble("*hiss* Something went wrong with my brain. Try again?")
+            else:
+                self.show_text_bubble("Clipboard is empty. What am I supposed to read? *tail flick*")
+            return
+
+        if "copy that" in text or "copy last response" in text:
+            if self.last_response:
+                pyperclip.copy(self.last_response)
+                self.show_text_bubble("Copied it. Happy now?")
+            else:
+                self.show_text_bubble("Nothing to copy, genius.")
+            return
+
+        if "lock computer" in text or "lock screen" in text:
+            self.show_text_bubble("Locking your computer 🔒")
+            self.lock_computer()
+            return
+
+        if "kill yourself" in text or "go to sleep" in text or "exit pet" in text:
+            self.show_text_bubble("Goodbye! 👋")
+            self.shutdown_pet()
+            return
+
+        if "stop talking" in text:
+            self.pet_talking_enabled = False
+            self.show_text_bubble("Okay, I'll stay quiet.")
+            return
+
+        if "start talking" in text:
+            self.pet_talking_enabled = True
+            self.show_text_bubble("I'm back! Missed me?")
+            return
+
+        if self.pet_talking_enabled:
+            self.show_text_bubble(f"You: {text}", user=True)
+            try:
+                response = ask_pet(text)
+                self.last_response = response
+                self.show_text_bubble(response)
+            except Exception as e:
+                if "503" in str(e):
+                    self.show_text_bubble("*yawn* The server is taking a catnap right now. Try again in a minute.")
+                else:
+                    self.show_text_bubble("*hiss* Something went wrong with my brain. Try again?")
+        else:
+            print("Pet is muted — no response.")
+
+    def lock_computer(self):
+        if sys.platform == 'win32':
+            os.system('rundll32.exe user32.dll,LockWorkStation')
+        # Add support for other platforms if needed
+
+    def shutdown_pet(self):
+        self.root.quit()
+
 if __name__ == "__main__":
     root = tk.Tk()
     assistant = DesktopAssistant(root)
 
-    def handle_voice_input(text):
-        assistant.show_text_bubble(f"You said: {text}")
-        response = ask_pet(text)
-        assistant.show_text_bubble(response)
-
     # Start voice listener in background
-    listen_background(callback=handle_voice_input)
+    listen_background(callback=assistant.handle_voice_input)
 
     assistant.show_text_bubble("Hey! I'm listening 👂")
     root.mainloop()
