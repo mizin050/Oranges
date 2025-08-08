@@ -2,6 +2,9 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import os
 import sys
+import random
+from chatbot import ask_pet
+from voice_listen import listen_background
 
 def resource_path(relative_path):
     try:
@@ -10,41 +13,102 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-class DesktopPet:
+class DesktopAssistant:
     def __init__(self, root):
         self.root = root
         self.root.overrideredirect(True)
         self.root.wm_attributes("-topmost", True)
-        self.root.geometry("300x300+-80+100")
+        self.root.geometry("300x300+100+100")
         self.root.wm_attributes('-transparentcolor', 'black')
 
         self.canvas = tk.Canvas(self.root, width=300, height=300, bg='black', highlightthickness=0)
         self.canvas.pack()
 
-        self.sprite = self.load_animation("assets/defaultIdle")
+        self.animations = self.load_animations()
+        self.sprite = self.animations.get("idle_default", [])[0:1]
         self.sprite_index = 0
         self.sprite_img = self.canvas.create_image(150, 150, image=self.sprite[self.sprite_index])
 
         self.animate()
-
-    def load_animation(self, folder):
-        frames = []
-        folder_path = resource_path(folder)
-        if os.path.exists(folder_path):
-            for file in sorted(os.listdir(folder_path)):
-                if file.endswith((".png", ".gif")):
-                    path = os.path.join(folder_path, file)
-                    img = Image.open(path).resize((105, 105))
-                    frames.append(ImageTk.PhotoImage(img))
-        return frames
+        self.root.after(25000, self.switch_idle_randomly)
 
     def animate(self):
-        if self.sprite:
-            self.sprite_index = (self.sprite_index + 1) % len(self.sprite)
-            self.canvas.itemconfig(self.sprite_img, image=self.sprite[self.sprite_index])
+        if not self.sprite:
+            return
+        self.sprite_index = (self.sprite_index + 1) % len(self.sprite)
+        self.canvas.itemconfig(self.sprite_img, image=self.sprite[self.sprite_index])
         self.root.after(100, self.animate)
+
+    def switch_idle_randomly(self):
+        if random.random() < 0.85 or not self.animations["idle_alts"]:
+            self.sprite = self.animations["idle_default"]
+        else:
+            self.sprite = random.choice(self.animations["idle_alts"])
+        self.sprite_index = 0
+        self.root.after(25000, self.switch_idle_randomly)
+
+    def load_animations(self):
+        animations = {}
+
+        def load_frames(folder):
+            path = resource_path(folder)
+            frames = []
+            if not os.path.exists(path): return frames
+            for file in sorted(os.listdir(path)):
+                if file.lower().endswith(('.png', '.gif')):
+                    full_path = os.path.join(path, file)
+                    img = Image.open(full_path).convert("RGBA")
+                    img = img.resize((105, 105), Image.NEAREST)
+                    frames.append(ImageTk.PhotoImage(img))
+            return frames
+
+        animations["idle_default"] = load_frames("assets/defaultIdle")
+        animations["idle_alts"] = []
+
+        for i in range(1, 9):
+            alt_path = f"assets/idle{i}"
+            if os.path.isdir(resource_path(alt_path)):
+                frames = load_frames(alt_path)
+                if frames:
+                    animations["idle_alts"].append(frames)
+
+        return animations
+
+    def show_text_bubble(self, message):
+        bubble = tk.Toplevel(self.root)
+        bubble.overrideredirect(True)
+        x = self.root.winfo_rootx() + 160
+        y = self.root.winfo_rooty() + 40
+        bubble.geometry(f"+{x}+{y}")
+
+        label = tk.Label(
+            bubble,
+            text=message,
+            bg="white",
+            fg="black",
+            font=("Arial", 10),
+            wraplength=200,
+            relief="solid",
+            borderwidth=1,
+            padx=6,
+            pady=4
+        )
+        label.pack()
+        bubble.lift()
+        bubble.attributes("-topmost", True)
+        bubble.after(5000, bubble.destroy)
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = DesktopPet(root)
+    assistant = DesktopAssistant(root)
+
+    def handle_voice_input(text):
+        assistant.show_text_bubble(f"You said: {text}")
+        response = ask_pet(text)
+        assistant.show_text_bubble(response)
+
+    # Start voice listener in background
+    listen_background(callback=handle_voice_input)
+
+    assistant.show_text_bubble("Hey! I'm listening 👂")
     root.mainloop()
