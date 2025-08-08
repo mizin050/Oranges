@@ -84,9 +84,22 @@ _Oranges in their default idle animation_
 
 # Additional Demos
 
-- Different animation sets available in the assets folder
-- Right-click to close the application
-- Left-click and drag to move Wiskers around
+## 🎙️ Voice Commands & Features#
+- **`answer this`** / **`what's on clipboard`**  
+  Reads the text from your clipboard and responds to it using the AI pet.
+- **`copy that`** / **`copy last response`**  
+  Copies the pet’s last response to your clipboard.
+- **`lock computer`** / **`lock screen`**  
+  Locks your computer (Windows supported).
+- **`kill yourself`** / **`go to sleep`** / **`exit pet`**  
+  Shuts down the desktop pet completely.
+- **`stop talking`**  
+  Mutes the pet — it will not respond to your voice commands until re-enabled.
+- **`start talking`**  
+  Unmutes the pet — it resumes responding to voice commands.
+- **General speech** (anything else you say)  
+  If the pet is not muted, it replies in its sarcastic cat tone.
+
 
 ## Team Contributions
 Mizin Sadikh : Cat Brain & Voice
@@ -110,6 +123,7 @@ Made with ❤️ at TinkerHub Useless Projects
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--25-25?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects)
 ````
+
 
 
 
