@@ -44,7 +44,7 @@ For Software:
 ### Implementation
 
 For Software:
-
+```
 # Installation
 
 ````bash
@@ -60,8 +60,7 @@ pip install -r requirements.txt
 python main.py
 or
 Download and run the .exe file
-
-
+```
 ### Project Documentation
 
 For Software:
@@ -111,4 +110,5 @@ Made with ❤️ at TinkerHub Useless Projects
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--25-25?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects)
 ````
+
 
