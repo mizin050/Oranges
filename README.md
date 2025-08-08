@@ -90,18 +90,18 @@ _Oranges in their default idle animation_
 
 ## Team Contributions
 Mizin Sadikh : Cat Brain & Voice
-Integrated Groq API with LLaMA 3 model for sarcastic, short responses
-Wrote chatbot.py logic to handle prompts and responses
-Designed system prompt to give the cat its personality
-Implemented voice recognition with SpeechRecognition.
-Added voice command handling for clipboard reading, copying, locking screen, and muting/unmuting.
+- Integrated Groq API with LLaMA 3 model for sarcastic, short responses
+- Wrote chatbot.py logic to handle prompts and responses
+- Designed system prompt to give the cat its personality
+- Implemented voice recognition with SpeechRecognition.
+- Added voice command handling for clipboard reading, copying, locking screen, and muting/unmuting.
 
 Mirza Talha Baig : Cat Body & UI
-Built Tkinter-based floating, transparent, always-on-top pet window
-Added sprite animation system with idle/default and alternate animations
-Implemented speech bubble UI for showing messages
-Managed image loading, resizing, and asset handling from assets/
-Developed random idle animation switching logic
+- Built Tkinter-based floating, transparent, always-on-top pet window
+- Added sprite animation system with idle/default and alternate animations
+- Implemented speech bubble UI for showing messages
+- Managed image loading, resizing, and asset handling from assets/
+- Developed random idle animation switching logic
 
 ---
 
@@ -110,6 +110,7 @@ Made with ❤️ at TinkerHub Useless Projects
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--25-25?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects)
 ````
+
 
 
 
