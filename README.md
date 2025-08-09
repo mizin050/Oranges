@@ -25,7 +25,11 @@ Let’s be honest, working at your computer can get boring. Sure, you could play
 
 So, we built Oranges a snarky little desktop cat that chats with you, reacts to your voice, steals a peek at your clipboard, and throws in a meow or two just to keep you humble.
 
+### Project EXE file
 
+# app(exe)
+
+-[exe_file]([https://drive.google.com/file/d/1scU8ZiQAsOZyeKiw_YF2UwJlVDt_jl_W/view?usp=sharing](https://drive.google.com/file/d/1p6uKZU76IjTyAVs8iJJUvRbA2R6eF5zz/view?usp=sharing))
 ## Technical Detail
 - **Voice Commands** — Talk to your pet and get begrudgingly useful answers.
 - **Groq AI Brain** — Powered by LLaMA 3 (`llama3-70b-8192`) for witty, concise responses.
@@ -127,6 +131,7 @@ Made with ❤️ at TinkerHub Useless Projects
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--25-25?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects)
 ````
+
 
 
 
