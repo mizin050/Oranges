@@ -29,7 +29,7 @@ So, we built Oranges a snarky little desktop cat that chats with you, reacts to 
 
 # app(exe)
 
--[exe_file]([https://drive.google.com/file/d/1scU8ZiQAsOZyeKiw_YF2UwJlVDt_jl_W/view?usp=sharing](https://drive.google.com/file/d/1p6uKZU76IjTyAVs8iJJUvRbA2R6eF5zz/view?usp=sharing))
+-[exe_file](https://drive.google.com/file/d/1p6uKZU76IjTyAVs8iJJUvRbA2R6eF5zz/view?usp=sharing)
 ## Technical Detail
 - **Voice Commands** — Talk to your pet and get begrudgingly useful answers.
 - **Groq AI Brain** — Powered by LLaMA 3 (`llama3-70b-8192`) for witty, concise responses.
